@@ -71,17 +71,27 @@ class SigninPage extends StatelessWidget {
   }
 
   Widget _createAccount(BuildContext context) {
-    return RichText(
-      text: TextSpan(children: [
-        const TextSpan(text: "Don't you have an account? "),
+  return RichText(
+    text: TextSpan(
+      children: [
+        const TextSpan(
+          text: "Don't you have an account? ",
+          style: TextStyle(color: Colors.white), 
+        ),
         TextSpan(
-            text: 'Create one',
-            recognizer: TapGestureRecognizer()
-              ..onTap = () {
-                AppNavigator.push(context, SignupPage());
-              },
-            style: const TextStyle(fontWeight: FontWeight.bold))
-      ]),
-    );
-  }
+          text: 'Create one',
+          recognizer: TapGestureRecognizer()
+            ..onTap = () {
+              AppNavigator.push(context, SignupPage());
+            },
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.white, 
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
 }

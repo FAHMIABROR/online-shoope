@@ -22,4 +22,6 @@ class ProductOrderedEntity {
     required this.createdDate,
     required this.id
   });
+
+  get name => null;
 }

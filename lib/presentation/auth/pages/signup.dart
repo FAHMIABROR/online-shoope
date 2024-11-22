@@ -109,7 +109,7 @@ class SignupPage extends StatelessWidget {
   Widget _createAccount(BuildContext context) {
     return RichText(
       text: TextSpan(children: [
-        const TextSpan(text: "Do you have an account? "),
+        const TextSpan(text: "Do you have an account? ",style: TextStyle(color: Colors.white)),
         TextSpan(
             text: 'Signin',
             recognizer: TapGestureRecognizer()

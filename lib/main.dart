@@ -2,8 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:online_shop/core/configs/theme/app_theme.dart';
-import 'package:online_shop/presentation/auth/pages/password_reset_email.dart';
-import 'package:online_shop/presentation/auth/pages/siginin.dart';
 import 'package:online_shop/presentation/splash/bloc/splash_cubit.dart';
 import 'package:online_shop/presentation/splash/pages/splash.dart';
 import 'package:online_shop/service_locator.dart';

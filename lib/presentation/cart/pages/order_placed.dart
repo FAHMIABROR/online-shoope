@@ -44,14 +44,13 @@ class OrderPlacedPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 30),
-                  // Button to track order
                   BasicAppButton(
                     title: 'Track Order',
                     onPressed: () {
                       AppNavigator.push(context, const TrackingOrderPage());
                     },
                   ),
-                  const SizedBox(height: 10), // Space between buttons
+                  const SizedBox(height: 10),
                   BasicAppButton(
                     title: 'Finish',
                     onPressed: () {

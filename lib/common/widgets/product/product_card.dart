@@ -15,49 +15,75 @@ class ProductCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         AppNavigator.push(
-            context,
-            ProductDetailPage(
-              productEntity: productEntity,
-            ));
+          context,
+          ProductDetailPage(productEntity: productEntity),
+        );
       },
       child: Container(
         width: 180,
+        margin: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(
-            color: AppColors.secondBackground,
-            borderRadius: BorderRadius.circular(8)),
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.3),
+              blurRadius: 8,
+              spreadRadius: 1,
+              offset: const Offset(0, 4),
+            ),
+          ],
+          gradient: LinearGradient(
+            colors: [
+              AppColors.secondBackground,
+              AppColors.secondBackground.withOpacity(0.7),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            // Product Image
             Expanded(
               flex: 4,
               child: Container(
                 decoration: BoxDecoration(
-                    color: Colors.white,
-                    image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: NetworkImage(
-                            ImageDisplayHelper.generateProductImageURL(
-                                productEntity.images[0]))),
-                    borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(8),
-                        topRight: Radius.circular(8))),
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(12),
+                    topRight: Radius.circular(12),
+                  ),
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(
+                      ImageDisplayHelper.generateProductImageURL(
+                        productEntity.images[0],
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ),
+            // Product Details
             Expanded(
-              flex: 1,
+              flex: 2,
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // Title
                     Text(
                       productEntity.title,
                       style: const TextStyle(
-                          fontSize: 12,
-                          overflow: TextOverflow.ellipsis,
-                          fontWeight: FontWeight.w300),
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      maxLines: 1,
                     ),
+                    const SizedBox(height: 4),
+                    // Price and Discount
                     Row(
                       children: [
                         Text(
@@ -65,25 +91,43 @@ class ProductCard extends StatelessWidget {
                               ? "${productEntity.price}\$"
                               : "${productEntity.discountedPrice}\$",
                           style: const TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w300,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.redAccent,
                           ),
                         ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          productEntity.discountedPrice == 0
-                              ? ''
-                              : "${productEntity.price}\$",
-                          style: const TextStyle(
+                        if (productEntity.discountedPrice != 0) ...[
+                          const SizedBox(width: 8),
+                          Text(
+                            "${productEntity.price}\$",
+                            style: const TextStyle(
                               fontSize: 12,
                               color: Colors.grey,
-                              fontWeight: FontWeight.w300,
-                              decoration: TextDecoration.lineThrough),
-                        ),
+                              decoration: TextDecoration.lineThrough,
+                            ),
+                          ),
+                        ],
                       ],
-                    )
+                    ),
+                    // Discount Badge
+                    if (productEntity.discountedPrice != 0)
+                      Container(
+                        margin: const EdgeInsets.only(top: 4),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 6, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: Colors.redAccent,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Text(
+                          "SALE",
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
                   ],
                 ),
               ),
